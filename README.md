@@ -10,3 +10,5 @@
     "redirect_uri": "localhost"
 }
 ```
+
+`sh run.sh`
