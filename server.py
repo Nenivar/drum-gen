@@ -1,4 +1,5 @@
-from flask import Flask, redirect, json, request
+from flask import Flask, redirect, request, url_for
+import json
 app = Flask('blah')
 
 auth = dict()
@@ -9,8 +10,9 @@ with open('auth.json', 'r') as f:
 def index():
     code = request.args.get('code')
     if code:
-        print(code)
-    return 'words'
+        return code
+    else:
+        return redirect(url_for('authorization'))
 
 @app.route('/authorization')
 def authorization():
