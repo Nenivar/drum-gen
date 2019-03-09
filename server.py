@@ -2,6 +2,8 @@ import json
 from flask import Flask, redirect, request, url_for
 import requests
 from spotipy import util
+from .interp import genMetronome
+
 app = Flask('blah')
 
 auth = dict()
@@ -19,6 +21,8 @@ def index():
         token = r.json()['access_token']
 
         r = requests.get('https://api.spotify.com/v1/audio-analysis/50DSbkbg64VwotJdcvSqkV', headers={'Authorization': 'Bearer {}'.format(token)})
+        genMetronome(r.json())
+
         return r.text
     else:
         return redirect(url_for('authorization'))
