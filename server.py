@@ -20,7 +20,7 @@ def index():
         r = requests.post('https://accounts.spotify.com/api/token', data=body)
         token = r.json()['access_token']
 
-        r = requests.get('https://api.spotify.com/v1/audio-analysis/50DSbkbg64VwotJdcvSqkV', headers={'Authorization': 'Bearer {}'.format(token)})
+        r = requests.get('https://api.spotify.com/v1/audio-analysis/{}'.format(auth['song_uri']), headers={'Authorization': 'Bearer {}'.format(token)})
         genMetronome(r.json())
 
         return r.text

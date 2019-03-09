@@ -17,14 +17,17 @@ def genMetronome(data):
 
     """ for i, pitch in enumerate(degrees):
         MyMIDI.addNote(track, channel, pitch, time + i, duration, volume) """
-    bpm = data['track']['tempo']
-    length = data['track']['duration']
+    #bpm = data['track']['tempo']
+    #length = data['track']['duration']
     #for i in range(0, length, bpm):
         #MyMIDI.addNote(track, channel, 60, time + i, duration, volume)
-    c = 0
+    """ c = 0
     while c < length:
         MyMIDI.addNote(track, channel, 60, c, duration, volume)
-        c += (bpm / 60)
+        c += (bpm / 60) """
+    beats = data['beats']
+    for b in beats:
+        MyMIDI.addNote(track, channel, 60, b['start'], b['duration'], volume)
 
     with open("major-scale.mid", "wb") as output_file:
         MyMIDI.writeFile(output_file)
